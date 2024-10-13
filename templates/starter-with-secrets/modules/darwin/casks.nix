@@ -2,25 +2,16 @@ _:
 
 [
   # Development Tools
-  "homebrew/cask/docker"
-  "visual-studio-code"
+  "wezterm"
 
   # Communication Tools
-  "discord"
-  "notion"
-  "slack"
-  "telegram"
-  "zoom"
 
   # Utility Tools
-  "syncthing"
+  # "syncthing"
 
   # Entertainment Tools
-  "vlc"
 
   # Productivity Tools
-  "raycast"
 
   # Browsers
-  "google-chrome"
 ]

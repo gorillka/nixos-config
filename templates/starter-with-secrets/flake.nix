@@ -22,7 +22,7 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
-    }; 
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +36,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
       devShell = system: let pkgs = nixpkgs.legacyPackages.${system}; in {
         default = with pkgs; mkShell {
-          nativeBuildInputs = with pkgs; [ bashInteractive git age age-plugin-yubikey ];
+          nativeBuildInputs = with pkgs; [ git age age-plugin-yubikey ];
           shellHook = with pkgs; ''
             export EDITOR=vim
           '';
