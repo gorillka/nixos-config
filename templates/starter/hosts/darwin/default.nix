@@ -30,23 +30,12 @@ let user = "%USER%"; in
     '';
   };
 
+  # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
+  # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
-    emacs-unstable
   ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
-
-  launchd.user.agents.emacs.path = [ config.environment.systemPath ];
-  launchd.user.agents.emacs.serviceConfig = {
-    KeepAlive = true;
-    ProgramArguments = [
-      "/bin/sh"
-      "-c"
-      "/bin/wait4path ${pkgs.emacs}/bin/emacs && exec ${pkgs.emacs}/bin/emacs --fg-daemon"
-    ];
-    StandardErrorPath = "/tmp/emacs.err.log";
-    StandardOutPath = "/tmp/emacs.out.log";
-  };
 
   system = {
     stateVersion = 4;
@@ -55,30 +44,46 @@ let user = "%USER%"; in
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
         ApplePressAndHoldEnabled = false;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = true;
 
         KeyRepeat = 2; # Values: 120, 90, 60, 30, 12, 6, 2
         InitialKeyRepeat = 15; # Values: 120, 94, 68, 35, 25, 15
 
+        "com.apple.keyboard.fnState" = false;
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
+        "com.apple.trackpad.enableSecondaryClick" = true;
       };
 
       dock = {
-        autohide = false;
+        autohide = true;
+        autohide-time-modifier = 0.25;
         show-recents = false;
         launchanim = true;
-        orientation = "bottom";
+        orientation = "left";
+
         tilesize = 48;
       };
 
       finder = {
-        _FXShowPosixPathInTitle = false;
+        ShowPathbar = true;
+        AppleShowAllFiles = true;
       };
+
+      # keyboard = {
+      #   remapCapsLockToControl = true;
+      # };
 
       trackpad = {
         Clicking = true;
         TrackpadThreeFingerDrag = true;
+        TrackpadRightClick = true;
+      };
+
+      magicmouse = {
+        MouseButtonMode = "TwoButton";
       };
     };
   };

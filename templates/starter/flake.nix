@@ -37,7 +37,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
       devShell = system: let pkgs = nixpkgs.legacyPackages.${system}; in {
         default = with pkgs; mkShell {
-          nativeBuildInputs = with pkgs; [ bashInteractive git ];
+          nativeBuildInputs = with pkgs; [ git ];
           shellHook = with pkgs; ''
             export EDITOR=vim
           '';
