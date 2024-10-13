@@ -3,10 +3,10 @@
 let
   user = "dustin";
   # Define the content of your file as a derivation
-  myEmacsLauncher = pkgs.writeScript "emacs-launcher.command" ''
-    #!/bin/sh
-      emacsclient -c -n &
-  '';
+  # myEmacsLauncher = pkgs.writeScript "emacs-launcher.command" ''
+  #   #!/bin/sh
+  #     emacsclient -c -n &
+  # '';
   sharedFiles = import ../shared/files.nix { inherit config pkgs; };
   additionalFiles = import ./files.nix { inherit user config pkgs; };
 in
@@ -37,9 +37,9 @@ in
     # $ mas search <app name>
     #
     masApps = {
-      "1password" = 1333542190;
-      "hidden-bar" = 1452453066;
-      "wireguard" = 1451685025;
+      # "1password" = 1333542190;
+      # "hidden-bar" = 1452453066;
+      # "wireguard" = 1451685025;
     };
   };
 
@@ -53,7 +53,7 @@ in
         file = lib.mkMerge [
           sharedFiles
           additionalFiles
-          { "emacs-launcher.command".source = myEmacsLauncher; }
+          # { "emacs-launcher.command".source = myEmacsLauncher; }
         ];
 
         stateVersion = "23.11";
@@ -71,22 +71,22 @@ in
   local = {
     dock.enable = true;
     dock.entries = [
-      { path = "/Applications/Slack.app/"; }
-      { path = "/System/Applications/Messages.app/"; }
-      { path = "/System/Applications/Facetime.app/"; }
-      { path = "/Applications/Telegram.app/"; }
-      { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "/System/Applications/Music.app/"; }
-      { path = "/System/Applications/News.app/"; }
-      { path = "/System/Applications/Photos.app/"; }
-      { path = "/System/Applications/Photo Booth.app/"; }
-      { path = "/System/Applications/TV.app/"; }
-      { path = "${pkgs.jetbrains.phpstorm}/Applications/PhpStorm.app/"; }
-      { path = "/Applications/TablePlus.app/"; }
-      { path = "/Applications/Asana.app/"; }
-      { path = "/Applications/Drafts.app/"; }
-      { path = "/System/Applications/Home.app/"; }
-      { path = "/Applications/iPhone Mirroring.app/"; }
+      # { path = "/Applications/Slack.app/"; }
+      # { path = "/System/Applications/Messages.app/"; }
+      # { path = "/System/Applications/Facetime.app/"; }
+      # { path = "/Applications/Telegram.app/"; }
+      # { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
+      # { path = "/System/Applications/Music.app/"; }
+      # { path = "/System/Applications/News.app/"; }
+      # { path = "/System/Applications/Photos.app/"; }
+      # { path = "/System/Applications/Photo Booth.app/"; }
+      # { path = "/System/Applications/TV.app/"; }
+      # { path = "${pkgs.jetbrains.phpstorm}/Applications/PhpStorm.app/"; }
+      # { path = "/Applications/TablePlus.app/"; }
+      # { path = "/Applications/Asana.app/"; }
+      # { path = "/Applications/Drafts.app/"; }
+      # { path = "/System/Applications/Home.app/"; }
+      # { path = "/Applications/iPhone Mirroring.app/"; }
       {
         path = toString myEmacsLauncher;
         section = "others";
