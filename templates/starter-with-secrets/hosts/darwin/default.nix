@@ -8,6 +8,7 @@ let user = "%USER%"; in
     ../../modules/darwin/secrets.nix
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
+    ../../modules/shared/programs/default.nix
      agenix.darwinModules.default
   ];
 

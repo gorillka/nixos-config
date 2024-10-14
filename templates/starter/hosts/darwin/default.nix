@@ -6,10 +6,12 @@ let user = "%USER%"; in
   imports = [
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
+    ../../modules/shared/programs/default.nix
   ];
 
   services.nix-daemon.enable = true;
 
+  # Setup user, packages, programs
   nix = {
     package = pkgs.nix;
     settings = {

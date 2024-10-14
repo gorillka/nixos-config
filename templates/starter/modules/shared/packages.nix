@@ -2,13 +2,14 @@
 
 with pkgs; [
   # General packages for development and system management
+  eza
+  zoxide
 
   # Encryption and security tools
 
   # Cloud-related tools and SDKs
 
   # Media-related packages
-  nerdfonts
 
   # Node.js development tools
 
@@ -20,5 +21,4 @@ with pkgs; [
 
   # Productivity Tools
   mas
-  starship
 ]

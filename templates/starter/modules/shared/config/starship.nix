@@ -2,185 +2,215 @@
 
 let
     config = ''
-                    # Отримання автозавершення вводу команд з config-schema.json
-                    "$schema" = 'https://starship.rs/config-schema.json'
 
-                    # Додавати порожні рядки між командними рядками
-                    add_newline = true
+            format = """
+            $directory\
+            $git_branch\
+            $git_status\
+            $fill\
+            $python\
+            $lua\
+            $nodejs\
+            $golang\
+            $haskell\
+            $rust\
+            $ruby\
+            $aws\
+            $docker_context\
+            $jobs\
+            $cmd_duration\
+            $line_break\
+            $character"""
 
-                    # Заміняти символ '❯' в командному рядку на символ  '➜'
-                    [character] # Назва модуля, який ми налаштовуємо – 'character'
-                    success_symbol = '[➜](bold green)' # Частина 'success_symbol' буде використовувати символ '➜' підсвічений значенням 'bold green'
+            # Отримання автозавершення вводу команд з config-schema.json
+            "$schema" = 'https://starship.rs/config-schema.json'
 
-                    # Вимкнути модуль package, повністю приховавши його в командному рядку
+            # Додавати порожні рядки між командними рядками
+            add_newline = true
 
-                    [aws]
-                    symbol = "  "
+            # Заміняти символ '❯' в командному рядку на символ  '➜'
+            [character] # Назва модуля, який ми налаштовуємо – 'character'
+            success_symbol = '[➜](bold green)' # Частина 'success_symbol' буде використовувати символ '➜' підсвічений значенням 'bold green'
 
-                    [buf]
-                    symbol = " "
+            # Вимкнути модуль package, повністю приховавши його в командному рядку
 
-                    [c]
-                    symbol = " "
+            [directory]
+            format = '[$path ]($style)'
+            truncation_length = 3
+            truncation_symbol = '…/'
+            truncate_to_repo = false
+            read_only = " 󰌾"
 
-                    [conda]
-                    symbol = " "
+            [git_branch]
+            symbol = " "
+            format = '[on](white) [$symbol$branch ]($style)'
 
-                    [crystal]
-                    symbol = " "
+            [git_status]
+            style = 'fg:red'
+            format = '([$all_status$ahead_behind]($style) )'
 
-                    [dart]
-                    symbol = " "
+            [fill]
+            symbol = ' '
 
-                    [directory]
-                    read_only = " 󰌾"
+            [aws]
+            symbol = "  "
 
-                    [docker_context]
-                    symbol = " "
+            [buf]
+            symbol = " "
 
-                    [elixir]
-                    symbol = " "
+            [c]
+            symbol = " "
 
-                    [elm]
-                    symbol = " "
+            [conda]
+            symbol = " "
 
-                    [fennel]
-                    symbol = " "
+            [crystal]
+            symbol = " "
 
-                    [fossil_branch]
-                    symbol = " "
+            [dart]
+            symbol = " "
 
-                    [git_branch]
-                    symbol = " "
+            [docker_context]
+            symbol = " "
 
-                    [golang]
-                    symbol = " "
+            [elixir]
+            symbol = " "
 
-                    [guix_shell]
-                    symbol = " "
+            [elm]
+            symbol = " "
 
-                    [haskell]
-                    symbol = " "
+            [fennel]
+            symbol = " "
 
-                    [haxe]
-                    symbol = " "
+            [fossil_branch]
+            symbol = " "
 
-                    [hg_branch]
-                    symbol = " "
+            [golang]
+            symbol = " "
 
-                    [hostname]
-                    ssh_symbol = " "
+            [guix_shell]
+            symbol = " "
 
-                    [java]
-                    symbol = " "
+            [haskell]
+            symbol = " "
 
-                    [julia]
-                    symbol = " "
+            [haxe]
+            symbol = " "
 
-                    [kotlin]
-                    symbol = " "
+            [hg_branch]
+            symbol = " "
 
-                    [lua]
-                    symbol = " "
+            [hostname]
+            ssh_symbol = " "
 
-                    [memory_usage]
-                    symbol = "󰍛 "
+            [java]
+            symbol = " "
 
-                    [meson]
-                    symbol = "󰔷 "
+            [julia]
+            symbol = " "
 
-                    [nim]
-                    symbol = "󰆥 "
+            [kotlin]
+            symbol = " "
 
-                    [nix_shell]
-                    symbol = " "
+            [lua]
+            symbol = " "
 
-                    [nodejs]
-                    symbol = " "
+            [memory_usage]
+            symbol = "󰍛 "
 
-                    [ocaml]
-                    symbol = " "
+            [meson]
+            symbol = "󰔷 "
 
-                    [os.symbols]
-                    Alpaquita = " "
-                    Alpine = " "
-                    AlmaLinux = " "
-                    Amazon = " "
-                    Android = " "
-                    Arch = " "
-                    Artix = " "
-                    CentOS = " "
-                    Debian = " "
-                    DragonFly = " "
-                    Emscripten = " "
-                    EndeavourOS = " "
-                    Fedora = " "
-                    FreeBSD = " "
-                    Garuda = "󰛓 "
-                    Gentoo = " "
-                    HardenedBSD = "󰞌 "
-                    Illumos = "󰈸 "
-                    Kali = " "
-                    Linux = " "
-                    Mabox = " "
-                    Macos = " "
-                    Manjaro = " "
-                    Mariner = " "
-                    MidnightBSD = " "
-                    Mint = " "
-                    NetBSD = " "
-                    NixOS = " "
-                    OpenBSD = "󰈺 "
-                    openSUSE = " "
-                    OracleLinux = "󰌷 "
-                    Pop = " "
-                    Raspbian = " "
-                    Redhat = " "
-                    RedHatEnterprise = " "
-                    RockyLinux = " "
-                    Redox = "󰀘 "
-                    Solus = "󰠳 "
-                    SUSE = " "
-                    Ubuntu = " "
-                    Unknown = " "
-                    Void = " "
-                    Windows = "󰍲 "
+            [nim]
+            symbol = "󰆥 "
 
-                    [package]
-                    symbol = "󰏗 "
-                    disabled = true
+            [nix_shell]
+            symbol = " "
 
-                    [perl]
-                    symbol = " "
+            [nodejs]
+            symbol = " "
 
-                    [php]
-                    symbol = " "
+            [ocaml]
+            symbol = " "
 
-                    [pijul_channel]
-                    symbol = " "
+            [os.symbols]
+            Alpaquita = " "
+            Alpine = " "
+            AlmaLinux = " "
+            Amazon = " "
+            Android = " "
+            Arch = " "
+            Artix = " "
+            CentOS = " "
+            Debian = " "
+            DragonFly = " "
+            Emscripten = " "
+            EndeavourOS = " "
+            Fedora = " "
+            FreeBSD = " "
+            Garuda = "󰛓 "
+            Gentoo = " "
+            HardenedBSD = "󰞌 "
+            Illumos = "󰈸 "
+            Kali = " "
+            Linux = " "
+            Mabox = " "
+            Macos = " "
+            Manjaro = " "
+            Mariner = " "
+            MidnightBSD = " "
+            Mint = " "
+            NetBSD = " "
+            NixOS = " "
+            OpenBSD = "󰈺 "
+            openSUSE = " "
+            OracleLinux = "󰌷 "
+            Pop = " "
+            Raspbian = " "
+            Redhat = " "
+            RedHatEnterprise = " "
+            RockyLinux = " "
+            Redox = "󰀘 "
+            Solus = "󰠳 "
+            SUSE = " "
+            Ubuntu = " "
+            Unknown = " "
+            Void = " "
+            Windows = "󰍲 "
 
-                    [python]
-                    symbol = " "
+            [package]
+            symbol = "󰏗 "
 
-                    [rlang]
-                    symbol = "󰟔 "
+            [perl]
+            symbol = " "
 
-                    [ruby]
-                    symbol = " "
+            [php]
+            symbol = " "
 
-                    [rust]
-                    symbol = "󱘗 "
+            [pijul_channel]
+            symbol = " "
 
-                    [scala]
-                    symbol = " "
+            [python]
+            symbol = " "
 
-                    [swift]
-                    symbol = " "
+            [rlang]
+            symbol = "󰟔 "
 
-                    [zig]
-                    symbol = " "
+            [ruby]
+            symbol = " "
 
-                '';
+            [rust]
+            symbol = "󱘗 "
+
+            [scala]
+            symbol = " "
+
+            [swift]
+            symbol = " "
+
+            [zig]
+            symbol = " "
+            '';
 in
 {
     ".config/starship.toml" = {

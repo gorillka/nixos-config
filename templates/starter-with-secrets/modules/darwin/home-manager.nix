@@ -51,8 +51,6 @@ in
         file = lib.mkMerge [
           sharedFiles
           additionalFiles
-          weztermConfig
-          starshipConfig
         ];
         stateVersion = "24.05";
       };
