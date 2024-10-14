@@ -5,5 +5,5 @@
 	#           to find the file       Where the file is located relative to this .nix file
 	#                    |                             |
 	#
-    home.file.".wezterm.lua".source = ./wezterm.lua;
+    xdg.configFile."wezterm".source = ./wezterm;
 }

@@ -1,8 +1,22 @@
+-- Helper function:
+-- returns color scheme dependant on operating system theme setting (dark/light)
+local function color_scheme_for_appearance(appearance)
+    if appearance:find "Dark" then
+      return "GitHub Dark"
+    else
+      return "GitHub Light"
+    end
+  end
+
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
 -- This will hold the configuration.
-local config = wezterm.config_builder()
+local config = {}
+
+if wezterm.config_builder then
+    config = wezterm.config_builder()
+end
 
 -- This is where you actually apply your config choices
 
@@ -25,7 +39,7 @@ config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.75
 config.macos_window_background_blur = 10
 
-config.color_scheme = 'GitHub Dark'
+config.color_scheme = color_scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.window_close_confirmation = 'NeverPrompt'
 
@@ -41,6 +55,49 @@ config.colors = {
 -- 	selection_fg = "#CBE0F0",
 -- 	ansi = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#0FC5ED", "#a277ff", "#24EAF7", "#24EAF7" },
 -- 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
+}
+
+-- from: https://akos.ma/blog/adopting-wezterm/
+config.hyperlink_rules = {
+  -- Matches: a URL in parens: (URL)
+  {
+    regex = "\\((\\w+://\\S+)\\)",
+    format = "$1",
+    highlight = 1,
+  },
+  -- Matches: a URL in brackets: [URL]
+  {
+    regex = "\\[(\\w+://\\S+)\\]",
+    format = "$1",
+    highlight = 1,
+  },
+  -- Matches: a URL in curly braces: {URL}
+  {
+    regex = "\\{(\\w+://\\S+)\\}",
+    format = "$1",
+    highlight = 1,
+  },
+  -- Matches: a URL in angle brackets: <URL>
+  {
+    regex = "<(\\w+://\\S+)>",
+    format = "$1",
+    highlight = 1,
+  },
+  -- Then handle URLs not wrapped in brackets
+  {
+    -- Before
+    --regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+    --format = '$0',
+    -- After
+    regex = "[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)",
+    format = "$1",
+    highlight = 1,
+  },
+  -- implicit mailto link
+  {
+    regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
+    format = "mailto:$0",
+  },
 }
 
 -- and finally, return the configuration to wezterm
